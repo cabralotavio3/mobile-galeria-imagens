@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Image, Button, StyleSheet } from 'react-native';
 
 const VisualizadorScreen = ({ route, navigation }: any) => {
-  const { url } = route.params; 
+  const { source } = route.params; 
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: url }} style={styles.image} />
+      <Image source={source} style={styles.image} />
       <Button title="Voltar" onPress={() => navigation.goBack()} />
     </View>
   );
@@ -17,10 +17,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#000',
   },
   image: {
     width: '100%',
-    height: '80%',
+    flex: 1,
     resizeMode: 'contain',
   },
 });

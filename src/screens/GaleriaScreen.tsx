@@ -1,25 +1,27 @@
 import React from 'react';
-import { ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const imagens = [
-  'https://upload.wikimedia.org/wikipedia/commons/2/2f/Acoustic_guitar.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/1/1b/Electric_Guitar.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/4/4d/Fender_Stratosphere_Guitar.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/6/65/Fender_Telecaster.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/9/94/Dean_Z_Guitar.jpg',
+  { id: '1', source: require('../../assets/guitarra1.jpg') },
+  { id: '2', source: require('../../assets/guitarra2.jpg') },
+  { id: '3', source: require('../../assets/guitarra3.jpg') },
+  { id: '4', source: require('../../assets/guitarra4.jpg') },
+  { id: '5', source: require('../../assets/guitarra5.jpg') },
 ];
 
 const GaleriaScreen = ({ navigation }: any) => {
   return (
-    <ScrollView style={styles.container}>
-      {imagens.map((url, index) => (
-        <TouchableOpacity 
-          key={index} 
-          onPress={() => navigation.navigate('Visualizador', { url })}
-        >
-          <Image source={{ uri: url }} style={styles.thumbnail} />
-        </TouchableOpacity>
-      ))}
+    <ScrollView>
+      <View style={styles.container}>
+        {imagens.map((imagem) => (
+          <TouchableOpacity 
+            key={imagem.id} 
+            onPress={() => navigation.navigate('Visualizador', { source: imagem.source })}
+          >
+            <Image source={imagem.source} style={styles.thumbnail} />
+          </TouchableOpacity>
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -27,12 +29,16 @@ const GaleriaScreen = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    padding: 5,
   },
   thumbnail: {
-    width: 100,
-    height: 100,
-    marginBottom: 10,
+    width: 110,
+    height: 110,
+    margin: 5,
+    borderRadius: 8,
   },
 });
 
